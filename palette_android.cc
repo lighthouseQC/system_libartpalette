@@ -30,7 +30,6 @@
 #include <android-base/macros.h>
 #include <cutils/ashmem.h>
 #include <cutils/trace.h>
-#include <log/event_tag_map.h>
 #include <processgroup/processgroup.h>
 #include <processgroup/sched_policy.h>
 #include <tombstoned/tombstoned.h>
@@ -233,4 +232,9 @@ enum PaletteStatus PaletteAshmemSetProtRegion(int fd, int prot) {
         return PaletteStatus::kCheckErrno;
     }
     return PaletteStatus::kOkay;
+}
+
+enum PaletteStatus PaletteGetHooks(PaletteHooks** hooks) {
+  *hooks = nullptr;
+  return PaletteStatus::kNotSupported;
 }
