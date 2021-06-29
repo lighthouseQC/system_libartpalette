@@ -18,7 +18,6 @@
 
 #include <map>
 #include <mutex>
-#include <stdbool.h>
 
 #include <android-base/logging.h>
 #include <android-base/macros.h>  // For ATTRIBUTE_UNUSED
@@ -54,8 +53,8 @@ palette_status_t PaletteWriteCrashThreadStacks(/*in*/ const char* stacks, size_t
     return PALETTE_STATUS_OK;
 }
 
-palette_status_t PaletteTraceEnabled(/*out*/ bool* enabled) {
-    *enabled = false;
+palette_status_t PaletteTraceEnabled(/*out*/ int32_t* enabled) {
+    *enabled = 0;
     return PALETTE_STATUS_OK;
 }
 
@@ -82,47 +81,12 @@ palette_status_t PaletteAshmemSetProtRegion(int fd ATTRIBUTE_UNUSED, int prot AT
     return PALETTE_STATUS_NOT_SUPPORTED;
 }
 
-palette_status_t PaletteCreateOdrefreshStagingDirectory(const char** staging_dir) {
-    *staging_dir = nullptr;
+palette_status_t PaletteGetHooks(PaletteHooks** hooks) {
+    *hooks = nullptr;
     return PALETTE_STATUS_NOT_SUPPORTED;
 }
 
-palette_status_t PaletteShouldReportDex2oatCompilation(bool* value) {
-  *value = false;
-  return PALETTE_STATUS_OK;
-}
-
-palette_status_t PaletteNotifyStartDex2oatCompilation(int source_fd ATTRIBUTE_UNUSED,
-                                                      int art_fd ATTRIBUTE_UNUSED,
-                                                      int oat_fd ATTRIBUTE_UNUSED,
-                                                      int vdex_fd ATTRIBUTE_UNUSED) {
-  return PALETTE_STATUS_OK;
-}
-
-palette_status_t PaletteNotifyEndDex2oatCompilation(int source_fd ATTRIBUTE_UNUSED,
-                                                    int art_fd ATTRIBUTE_UNUSED,
-                                                    int oat_fd ATTRIBUTE_UNUSED,
-                                                    int vdex_fd ATTRIBUTE_UNUSED) {
-  return PALETTE_STATUS_OK;
-}
-
-palette_status_t PaletteNotifyDexFileLoaded(const char* path ATTRIBUTE_UNUSED) {
-  return PALETTE_STATUS_OK;
-}
-
-palette_status_t PaletteNotifyOatFileLoaded(const char* path ATTRIBUTE_UNUSED) {
-  return PALETTE_STATUS_OK;
-}
-
-palette_status_t PaletteShouldReportJniInvocations(bool* value) {
-  *value = false;
-  return PALETTE_STATUS_OK;
-}
-
-palette_status_t PaletteNotifyBeginJniInvocation(JNIEnv* env ATTRIBUTE_UNUSED) {
-  return PALETTE_STATUS_OK;
-}
-
-palette_status_t PaletteNotifyEndJniInvocation(JNIEnv* env ATTRIBUTE_UNUSED) {
-  return PALETTE_STATUS_OK;
+palette_status_t PaletteCreateOdrefreshStagingDirectory(const char** staging_dir) {
+    *staging_dir = nullptr;
+    return PALETTE_STATUS_NOT_SUPPORTED;
 }

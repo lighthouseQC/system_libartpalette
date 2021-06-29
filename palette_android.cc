@@ -152,8 +152,8 @@ palette_status_t PaletteWriteCrashThreadStacks(/*in*/ const char* stacks, size_t
     return status;
 }
 
-palette_status_t PaletteTraceEnabled(/*out*/ bool* enabled) {
-    *enabled = (ATRACE_ENABLED() != 0) ? true : false;
+palette_status_t PaletteTraceEnabled(/*out*/ int32_t* enabled) {
+    *enabled = (ATRACE_ENABLED() != 0) ? 1 : 0;
     return PALETTE_STATUS_OK;
 }
 
@@ -229,6 +229,11 @@ palette_status_t PaletteAshmemSetProtRegion(int fd, int prot) {
         return PALETTE_STATUS_CHECK_ERRNO;
     }
     return PALETTE_STATUS_OK;
+}
+
+palette_status_t PaletteGetHooks(PaletteHooks** hooks) {
+    *hooks = nullptr;
+    return PALETTE_STATUS_NOT_SUPPORTED;
 }
 
 palette_status_t PaletteCreateOdrefreshStagingDirectory(const char** staging_dir) {
